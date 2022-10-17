@@ -1,0 +1,31 @@
+var fs = require('fs');
+function read(file) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(file, (err, data) => {
+        if (err) {
+        reject(err)
+        }
+        else
+        {
+        resolve(data)
+        }
+  });
+});
+}
+read("file.txt").then((data)=>{
+  console.log("Le nombre de caractère est"+data.length);
+}, ()=>
+ {
+  console.error("L'opération a échoué");
+});
+
+
+const readline = require('readline');
+rl = readline.createInterface(process.stdin,  process.stdout);
+rl.question('Voulez-vous lire le contenu du fichier?: ', (answer) => {
+    let description = answer;
+    
+});    
+
+
+

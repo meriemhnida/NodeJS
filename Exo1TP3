@@ -1,0 +1,126 @@
+//fs = require('fs');
+let fichierSource = process.argv[2]; // nom de fichier récupéré depuis arguments de ligne de commande
+let fichierDestination = 'resultat.txt';
+//Exerice 1
+/*
+let contenu = fs.readFileSync(fichierSource);
+ contenu = contenu.toString().toLowerCase();
+ console.log(contenu)
+fs.writeFileSync(fichierDestination, contenu)
+*/
+
+/* //Exercice 2
+
+const fs = require('fs');
+const fichierSource = process.argv[2]; 
+const fichierDestination = 'résultat.txt';
+let contenu = ""
+fs.readFile(fichierSource, (err, data) => {
+    if (err !== null) {
+        console.error(err);
+        }
+    else
+   contenu =data.toString();
+   contenu.toLowerCase()
+   fs.writeFile(fichierDestination, contenu, (err) => {
+    if (err)
+    console.error(err);
+        });
+    });
+
+*/
+
+
+/*
+function LireFichier(fichierSource, fError, fSuccess){
+    fs.readFile(fichierSource, (err, data) => {
+        if (err !== null) {
+            fError(err)
+            }
+        else
+        {
+            fSuccess(data)
+        }
+    });
+}
+    function fError(err) {
+        console.error(err)
+        }
+
+    function fSuccess(data)
+    {
+        contenu =data.toString();
+        contenu.toLowerCase()
+        fs.writeFile(fichierDestination, contenu, (err) => {
+         if (err)
+         console.error(err);
+             });
+    }
+    LireFichier("file.txt",callback,callback1)
+*/
+
+/*
+    function LireFichier(fichierSource) {
+        return new Promise((resolve, reject) => {
+          fs.readFile(fichierSource, (err, data) => {
+              if (err) {
+              reject(err)
+              }
+              else
+              {
+              resolve(data)
+              }
+        });
+      });
+      }
+      LireFichier("file.txt").then((data)=>{
+        contenu =data.toString().toLowerCase()
+        fs.writeFile(fichierDestination, contenu, (err) => {
+         if (err)
+         console.error(err);
+             });
+      }, ()=>
+       {
+        console.error("L'opération a échoué");
+      });
+      
+    */  
+  const fs = require('fs').promises;
+      async function LireFichier()
+      {
+      try {
+        const data = await fs.readFile('file.txt'); 
+        contenu=data.toString().toLowerCase()
+        return contenu
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    LireFichier()   
+    
+
+async function EcrireFichier()
+      {
+     try {
+        let data= await LireFichier()
+       
+            await fs.writeFile('file1.txt', data); 
+            } catch (error) {
+            console.log(error)
+          }
+    
+    }
+
+    EcrireFichier()
+   /*
+    LireFichier().then((data)=>{
+    contenu=data.toString()
+    EcrireFichier(contenu).then(() =>{
+        console.log("Exerice résolu avec succès")
+    });
+    });
+*/
+
+  
+    
